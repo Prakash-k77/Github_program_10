@@ -1,15 +1,5 @@
--- ============================================
--- RDBMS PROGRAM 10
--- LEFT JOIN and RIGHT JOIN
--- ============================================
-
--- Step 1: Create Database
 CREATE DATABASE IF NOT EXISTS CollegeDB;
-
--- Step 2: Select Database
 USE CollegeDB;
-
--- Step 3: Create Course Table
 
 CREATE TABLE Course (
     CourseID INT PRIMARY KEY,
@@ -17,13 +7,10 @@ CREATE TABLE Course (
     Credits INT
 );
 
--- Step 4: Insert Course Records
--- 201 - Database Systems - 4
--- 202 - Data Structures - 3
--- 203 - Mathematics - 4
-
-
--- Step 5: Create Enrollment Table
+INSERT INTO Course VALUES
+(201, 'Database Systems', 4),
+(202, 'Data Structures', 3),
+(203, 'Mathematics', 4);
 
 CREATE TABLE Enrollment (
     EnrollmentID INT PRIMARY KEY,
@@ -31,18 +18,26 @@ CREATE TABLE Enrollment (
     CourseID INT
 );
 
--- Step 6: Insert Enrollment Records
--- 1 - 1001 - 201
--- 2 - 1001 - 202
--- 3 - 1002 - 203
--- 4 - 1003 - 201
+INSERT INTO Enrollment VALUES
+(1, 1001, 201),
+(2, 1001, 202),
+(3, 1002, 203),
+(4, 1003, 201);
 
+-- LEFT JOIN
+SELECT Course.CourseID,
+       Course.CourseName,
+       Enrollment.EnrollmentID,
+       Enrollment.StudentID
+FROM Course
+LEFT JOIN Enrollment
+ON Course.CourseID = Enrollment.CourseID;
 
--- Step 7: Perform LEFT JOIN
--- Display CourseID, CourseName,
--- EnrollmentID and StudentID
-
-
--- Step 8: Perform RIGHT JOIN
--- Display CourseID, CourseName,
--- EnrollmentID and StudentID
+-- RIGHT JOIN
+SELECT Course.CourseID,
+       Course.CourseName,
+       Enrollment.EnrollmentID,
+       Enrollment.StudentID
+FROM Course
+RIGHT JOIN Enrollment
+ON Course.CourseID = Enrollment.CourseID;
